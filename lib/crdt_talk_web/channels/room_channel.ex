@@ -3,7 +3,9 @@ defmodule CrdtTalkWeb.RoomChannel do
 
   def join("room:lobby", payload, socket) do
     if authorized?(payload) do
-      {:ok, socket}
+      state = CrdtTalk.Counter.status()
+      IO.inspect(state)
+      {:ok, state, socket}
     else
       {:error, %{reason: "unauthorized"}}
     end
@@ -22,10 +24,16 @@ defmodule CrdtTalkWeb.RoomChannel do
     {:noreply, socket}
   end
 
-  def handle_in("update", %{"name" => name, "counter" => counter}, socket) do
-    IO.inspect(name)
-    IO.inspect(counter)
-    new_state = CrdtTalk.Counter.update(%{name => counter})
+  def handle_in("update", update, socket) do
+    IO.inspect("we got clientU #{inspect(update)}")
+    new_state = CrdtTalk.Counter.update(update)
+    broadcast(socket, "update", new_state)
+    IO.inspect("new state was #{inspect(new_state)}")
+    {:noreply, socket}
+  end
+
+  def handle_in("reset", _, socket) do
+    new_state = CrdtTalk.Counter.reset()
     broadcast(socket, "update", new_state)
     {:noreply, socket}
   end

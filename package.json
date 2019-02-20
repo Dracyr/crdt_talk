@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "augmented-aa-tree": "https://github.com/rudi-c/augmented-aa-tree#v0.0.3",
+    "codemirror": "^5.43.0",
+    "immutable": "^4.0.0-rc.12",
+    "share": "^0.7.40"
+  },
+  "devDependencies": {
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.3"
+  }
+}

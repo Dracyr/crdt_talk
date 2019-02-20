@@ -7,3 +7,7 @@
     <span id="counter">0</span>
   </article>
 </section>
+
+<section>
+  <div id="collaborator"></div>
+</section>
