@@ -91,3 +91,14 @@ code {
   font-family: proxima_novabold;
   font-weight: 700;
 }
+
+button {
+  background-color: #2C3E6B;
+  color: white;
+  border: none;
+  font-size: .8em;
+  padding: .3em .4em .3em .4em;
+  text-transform: uppercase !important;
+  font-family: proxima_novabold !important;
+  font-weight: 700;
+}
