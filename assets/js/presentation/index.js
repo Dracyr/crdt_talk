@@ -222,16 +222,15 @@ export default class Presentation extends React.Component {
           >
             What the heck is a CRDT?
           </Heading>
+
           <Notes>
-            <p>
-              Hello Everybody, today we are going to answer one simple question,
-              What the heck is the thing in the title of my talk.
-            </p>
+            What the heck is the thing
             <p>
               In anwering that, we are going to touch on some interesting topics
               in distributed computing, we are going to collaborate a bit, and
               hopefully add one more tool to your tech-toolboxes.
             </p>
+            <p>if questions</p>
           </Notes>
         </Slide>
 
@@ -258,10 +257,19 @@ export default class Presentation extends React.Component {
               Join Semi-Lattice
             </Heading>
           </Appear>
+
+          <Notes>
+            appear: join semi-lattice
+            I know you are engineers
+          </Notes>
         </Slide>
 
         <Slide>
           <Image src="/images/operations.png" />
+          <Notes>
+            name is selfexplanatory
+            <p>reverse order</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -284,6 +292,31 @@ export default class Presentation extends React.Component {
               </Heading>
             </div>
           </Appear>
+
+          <Notes>
+            a thing. put things in
+            you prrogrammed
+
+            <p>advanced b-trees</p>
+            <p>but now we know it's a thing</p>
+            <p>nextup: d&d</p>
+          </Notes>
+        </Slide>
+
+        <Slide
+          bgImage={coloredDots}
+          bgPosition="38vh top"
+          align="flex-start center"
+        >
+          <Heading textAlign="left" size={2} textColor="secondary">
+            Replicated & Distributed
+          </Heading>
+          <Image width="40vw" margin="0.5em 0 0" src="/images/nodes.png" />
+          <Notes>
+            cheating, closely related
+            <p>mention git, no dependencies</p>
+            <p>changes everywhere get to everybody</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -307,17 +340,12 @@ export default class Presentation extends React.Component {
           <Appear>
             <Image margin="0.5em 0 0" src="/images/paper.png" />
           </Appear>
-        </Slide>
 
-        <Slide
-          bgImage={coloredDots}
-          bgPosition="38vh top"
-          align="flex-start center"
-        >
-          <Heading textAlign="left" size={2} textColor="secondary">
-            Replicated & Distributed
-          </Heading>
-          <Image width="40vw" margin="0.5em 0 0" src="/images/nodes.png" />
+          <Notes>
+            <p>Paper from 2011</p>
+            <p>Like git, sometimes two person do things and then nextup</p>
+            <p>Nextup: image of git</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -328,6 +356,12 @@ export default class Presentation extends React.Component {
           align="flex-start center"
         >
           <Image width="50vw" src="/images/merge.png" />
+          <Notes>
+            <p>git doesnt know</p>
+            <p>don't solve using agile coaches</p>
+            <p>not semantically correct, but no conflicts</p>
+            <p>nextup: what was the problem</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -346,14 +380,29 @@ export default class Presentation extends React.Component {
           >
             What did we want to do now again?
           </Heading>
+          <Notes>
+            <p>so we know what the words mean</p>
+            <p>recap words, we have a thing. Cool cool cool</p>
+            <p>git was these things</p>
+            <p>Other tech like games have state</p>
+            <p>can be used for a lot of things, but I have teased text, what text problem are we solvign?</p>
+            <p>nextup is text: network</p>
+          </Notes>
         </Slide>
 
         <Slide align="center flex-start">
           <Image width="50vw" src="/images/network.png" />
+          <Notes>
+            <p>nextup idempotenxy</p>
+          </Notes>
         </Slide>
 
         <Slide align="center flex-start">
           <Image width="50vw" src="/images/idempotency.png" />
+          <Notes>
+            <p>lots of people</p>
+            <p>nextup lets build one</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -364,6 +413,11 @@ export default class Presentation extends React.Component {
           <Heading textAlign="left" size={2} textColor="secondary">
             Let's build one!
           </Heading>
+          <Notes>
+            <p>boid spring birdcounters</p>
+            <p>sync at end of day, no internet</p>
+            <p>nextup counter</p>
+          </Notes>
         </Slide>
 
         <Slide onActive={() => this.activateSlide('count_pos')}>
@@ -388,6 +442,11 @@ merge(c1, c2) => max(c1, c2)
               </Text>
             </Fill>
           </Layout>
+          <Notes>
+            <p>we have a dataype, and merge function</p>
+            <p>it has problem though, what?</p>
+            <p>nextup decrement</p>
+          </Notes>
         </Slide>
 
         <Slide onActive={() => this.activateSlide('count')}>
@@ -429,20 +488,12 @@ display(c) = c.pos - c.neg
               <button onClick={this.decrementCounter}>Less!</button>
             </Fill>
           </Layout>
-        </Slide>
-
-        <Slide onActive={() => this.activateSlide('text')} bgImage={coloredDots} bgPosition="38vh top">
-          <Text textSize={42}>{this.state.crdt.texts.map(t => `${t} `)}</Text>
-
-          <div style={{ marginTop: "5em" }}>
-            <input
-              type="text"
-              value={this.state.text_input}
-              onChange={this.handleChange}
-              onKeyPress={this.handleKeyPress}
-            />
-            <button onClick={this.sendText}>Send</button>
-          </div>
+          <Notes>
+            <p>does everybody get why two parts?</p>
+            <p>+ is itdempotent</p>
+            <p>now we have a display functions</p>
+            <p>nextup strings</p>
+          </Notes>
         </Slide>
 
         <Slide bgImage={coloredDots} bgPosition="38vh top">
@@ -458,6 +509,26 @@ merge(c1, c2) => union(c1, c2)
           <Image src="/images/all-the-things.png" />
         </Slide>
 
+        <Slide onActive={() => this.activateSlide('text')} bgImage={coloredDots} bgPosition="38vh top">
+          <Text textSize={42}>{this.state.crdt.texts.map(t => `${t} `)}</Text>
+
+          <div style={{ marginTop: "5em" }}>
+            <input
+              type="text"
+              value={this.state.text_input}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+            <button onClick={this.sendText}>Send</button>
+          </div>
+          <Notes>
+            <p>we do a similar operation here, </p>
+            <p>awesome, there's 2 problems though</p>
+            <p>nextup is deleting things, tombstones</p>
+            <p>after that is orderign</p>
+          </Notes>
+        </Slide>
+
         <Slide bgColor="red" bgImage={whiteDots} bgPosition="38vh top">
           <Heading textAlign="left">Deleting things?</Heading>
           <Heading
@@ -468,6 +539,11 @@ merge(c1, c2) => union(c1, c2)
           >
             Tombstones
           </Heading>
+          <Notes>
+            <p>so how do we make removing idempotent</p>
+            <p>we add a second set of tombstones</p>
+            <p>nextup delete demo</p>
+          </Notes>
         </Slide>
 
         <Slide onActive={() => this.activateSlide('text_delete')} bgImage={coloredDots} bgPosition="38vh top">
@@ -490,6 +566,12 @@ merge(c1, c2) => union(c1, c2)
             />
             <button onClick={this.sendText}>Send</button>
           </div>
+          <Notes>
+            <p>problem tho</p>
+            <p>we cant add third set</p>
+            <p>nextup deleting things</p>
+            <p>nextup tombstone id</p>
+          </Notes>
         </Slide>
 
         <Slide bgColor="red" bgImage={whiteDots} bgPosition="38vh top">
@@ -522,6 +604,12 @@ crdt = {
               </List>
             </Fill>
           </Layout>
+          <Notes>
+            <p>add id instead, UUID</p>
+            <p>OR-Set, even odd</p>
+            <p>LWW, using vector clocks</p>
+            <p>Nextup ordering!</p>
+          </Notes>
         </Slide>
 
         <Slide bgImage={coloredDots} bgPosition="38vh top">
@@ -562,6 +650,13 @@ crdt = {
             `}
             />
           </Appear>
+          <Notes>
+            <p>appear: integer</p>
+            <p>appear: rational number</p>
+            <p>there are langs with rat numbers, you dont love ruby</p>
+            <p>appear: lists! logoot</p>
+            <p>nextup textarea!</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -575,6 +670,10 @@ crdt = {
             style={{ height: "100%", width: "100%", minHeight: "50vh" }}
             ref={this.textRef}
           />
+          <Notes>
+            <p>everythgin</p>
+            <p>nextup: lies</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -594,6 +693,7 @@ crdt = {
           >
             On Reality, A brief interlude
           </Heading>
+          <p>nextup: not google docs</p>
         </Slide>
 
         <Slide
@@ -638,6 +738,11 @@ crdt = {
               Operational Transforms
             </Heading>
           </Appear>
+          <Notes>
+            <p>They didnt exist in 2011</p>
+            <p>More complex, nextup quote</p>
+            <p>Short explanation of difference</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -673,6 +778,9 @@ crdt = {
           >
             Anything else?
           </Heading>
+          <Notes>
+            <p>nextup reasons</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -712,6 +820,12 @@ crdt = {
               </ListItem>
             </Appear>
           </List>
+          <Notes>
+            <p>appear: memory</p>
+            <p>appear: bandwith, deltas</p>
+            <p>Not ACID, but SEC</p>
+            <p>nextup alternatives</p>
+          </Notes>
         </Slide>
 
         <Slide bgColor="greenish">
@@ -725,6 +839,12 @@ crdt = {
               <Image width="20vw" src="/images/consul-logo.png" />
             </Fill>
           </Layout>
+          <Notes>
+            <p>other things, they do raft</p>
+            <p>accept writes at every location and have low latency</p>
+            <p>geodistributed</p>
+            <p>CAP theorom, CRDT=AP raft stuff = CP</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -751,6 +871,10 @@ crdt = {
               <ListItem>Teletype for Atom</ListItem>
             </List>
           </Appear>
+          <Notes>
+            <p>appear: things</p>
+            <p>mostly text though</p>
+          </Notes>
         </Slide>
 
         <Slide
@@ -762,6 +886,10 @@ crdt = {
           <Heading textAlign="left" size={2} textColor="white">
             Almost done!
           </Heading>
+          <Notes>
+            Wrap up, next is just thank you
+            <p>recap, background, built one, laughed and discussed where to use them</p>
+          </Notes>
         </Slide>
 
         <Slide
