@@ -3,7 +3,7 @@ var StringBinding = require("sharedb-string-binding");
 
 // Open WebSocket connection to ShareDB server
 const WebSocket = require("reconnecting-websocket");
-var socket = new WebSocket("ws://" + window.location.host + ":8080");
+var socket = new WebSocket("ws://" + window.location.hostname + ":8080");
 // var socket = new WebSocket("ws://localhost:8080");
 var connection = new sharedb.Connection(socket);
 

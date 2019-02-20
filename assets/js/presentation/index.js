@@ -95,8 +95,7 @@ export default class Presentation extends React.Component {
       });
 
     const socketHost = `ws://${window.location.hostname}:8080`;
-    console.log(socketHost);
-    const sharedb_socket = new WebSocket("ws://localhost:8080");
+    const sharedb_socket = new WebSocket(socketHost);
     const sharedb_connection = new sharedb.Connection(sharedb_socket);
     sharedb_socket.onopen = function() {
       console.log("text connected");

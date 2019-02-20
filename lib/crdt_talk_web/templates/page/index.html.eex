@@ -1,13 +1,1 @@
-<section class="row">
-  <article class="column">
-    <h3>Counter</h3>
-    <button id="inc">Incre</button>
-    <button id="dec">Dec</button>
-
-    <span id="counter">0</span>
-  </article>
-</section>
-
-<section>
-  <div id="collaborator"></div>
-</section>
+<div id="client_root"></div>

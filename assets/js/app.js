@@ -11,56 +11,6 @@ import css from "../css/app.css";
 //
 import "phoenix_html";
 
-// Import local files
-//
-// Local files can be imported directly using relative paths, for example:
-// import socket from "./socket";
-
-// import renderCollaborator from "./alchemy-book/collaborator";
-
-// let clients pick, or auto generate this. Then store it in localstorage as well.
-// let my_name = "a";
-
-// // Now that you are connected, you can join channels with a topic:
-// let channel = socket.channel("room:lobby", {});
-// channel
-//   .join()
-//   .receive("ok", resp => {
-//     console.log("Joined successfully", resp);
-//   })
-//   .receive("error", resp => {
-//     console.log("Unable to join", resp);
-//   });
-
-// channel.on("update", resp => {
-//   console.log(resp);
-//   updateCounter(resp[my_name]);
-// });
-
-// let inc_button = document.getElementById("inc");
-// let dec_button = document.getElementById("dec");
-
-// let counter = 0;
-
-// let updateCounter = c => {
-//   document.getElementById("counter").innerText = c;
-// };
-
-// inc_button.addEventListener("click", e => {
-//   counter += 1;
-//   // updateCounter(counter);
-//   channel.push("update", { name: my_name, counter: counter });
-// });
-
-// dec_button.addEventListener("click", e => {
-//   counter -= 1;
-//   // updateCounter(counter);
-//   channel.push("update", { name: my_name, counter: counter });
-// });
-
 import app from "./presentation_app";
+import clientApp from "./client_app";
 
-// const collaborator = document.getElementById("collaborator");
-// if (collaborator) {
-//   renderCollaborator(collaborator);
-// }
