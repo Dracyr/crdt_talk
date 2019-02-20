@@ -420,7 +420,7 @@ export default class Presentation extends React.Component {
           </Notes>
         </Slide>
 
-        <Slide onActive={() => this.activateSlide('count_pos')}>
+        <Slide onActive={() => this.activateSlide('count')}>
           <Layout>
             <Fill>
               <CodePane
@@ -449,7 +449,7 @@ merge(c1, c2) => max(c1, c2)
           </Notes>
         </Slide>
 
-        <Slide onActive={() => this.activateSlide('count')}>
+        <Slide onActive={() => this.activateSlide('count_pos')}>
           <Layout>
             <Fill>
               <CodePane
