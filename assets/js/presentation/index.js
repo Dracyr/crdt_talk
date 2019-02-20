@@ -88,7 +88,7 @@ export default class Presentation extends React.Component {
       .join()
       .receive("ok", resp => {
         console.log("Joined successfully", resp);
-        this.setState({ crdt: resp });
+        this.setState({ crdt: resp.crdt, slide: resp.slide });
       })
       .receive("error", resp => {
         console.log("Unable to join", resp);
@@ -170,6 +170,7 @@ export default class Presentation extends React.Component {
   };
 
   activateFulltext = () => {
+    this.activateSlide('fulltext')
     console.log(this.textRef);
     if (this.textRef.current) {
       this.doc.subscribe(err => {
@@ -184,6 +185,15 @@ export default class Presentation extends React.Component {
     }
   };
 
+  handleStateChange = (state, newState) => {
+    console.log(state, newState);
+  }
+
+  activateSlide = (slide) => {
+    console.log("Activate ", slide);
+    this.channel.push("update_slide", slide);
+  }
+
   render() {
     return (
       <Deck
@@ -193,6 +203,7 @@ export default class Presentation extends React.Component {
         controls={false}
         showFullscreenControl={false}
         contentWidth="90vw"
+        onStateChange={this.handleStateChange}
       >
         <Slide
           bgColor="navy"
@@ -200,6 +211,7 @@ export default class Presentation extends React.Component {
           bgImage={whiteDots}
           bgPosition="38vh top"
           align="flex-start center"
+          onActive={() => this.activateSlide('start')}
         >
           <Heading
             textAlign="left"
@@ -354,7 +366,7 @@ export default class Presentation extends React.Component {
           </Heading>
         </Slide>
 
-        <Slide>
+        <Slide onActive={() => this.activateSlide('count_pos')}>
           <Layout>
             <Fill>
               <CodePane
@@ -378,7 +390,7 @@ merge(c1, c2) => max(c1, c2)
           </Layout>
         </Slide>
 
-        <Slide>
+        <Slide onActive={() => this.activateSlide('count')}>
           <Layout>
             <Fill>
               <CodePane
@@ -398,13 +410,6 @@ display(c) = c.pos - c.neg
               `}
               />
 
-              <button
-                style={{ marginRight: "1em" }}
-                onClick={this.incrementCounter}
-              >
-                More!
-              </button>
-              <button onClick={this.decrementCounter}>Less!</button>
             </Fill>
 
             <Fill>
@@ -414,11 +419,19 @@ display(c) = c.pos - c.neg
               <Text textSize={72}>
                 {this.state.crdt.counter} - {this.state.crdt.neg_counter}
               </Text>
+
+              <button
+                style={{ marginRight: "1em" }}
+                onClick={this.incrementCounter}
+              >
+                More!
+              </button>
+              <button onClick={this.decrementCounter}>Less!</button>
             </Fill>
           </Layout>
         </Slide>
 
-        <Slide bgImage={coloredDots} bgPosition="38vh top">
+        <Slide onActive={() => this.activateSlide('text')} bgImage={coloredDots} bgPosition="38vh top">
           <Text textSize={42}>{this.state.crdt.texts.map(t => `${t} `)}</Text>
 
           <div style={{ marginTop: "5em" }}>
@@ -457,7 +470,7 @@ merge(c1, c2) => union(c1, c2)
           </Heading>
         </Slide>
 
-        <Slide bgImage={coloredDots} bgPosition="38vh top">
+        <Slide onActive={() => this.activateSlide('text_delete')} bgImage={coloredDots} bgPosition="38vh top">
           <Text textSize={42}>
             {this.state.crdt.texts
               .filter(t => !this.state.crdt.texts_tombstones.includes(t))
@@ -565,6 +578,7 @@ crdt = {
         </Slide>
 
         <Slide
+          onActive={() => this.activateSlide('end')}
           bgColor="navy"
           textColor="primary"
           bgImage={whiteDots}
@@ -751,6 +765,7 @@ crdt = {
         </Slide>
 
         <Slide
+          onActive={() => this.activateSlide('final')}
           bgImage={coloredDots}
           bgPosition="38vh top"
           align="flex-start center"

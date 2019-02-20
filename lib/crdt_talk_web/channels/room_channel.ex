@@ -3,9 +3,10 @@ defmodule CrdtTalkWeb.RoomChannel do
 
   def join("room:lobby", payload, socket) do
     if authorized?(payload) do
-      state = CrdtTalk.Counter.status()
-      IO.inspect(state)
-      {:ok, state, socket}
+      {:ok, %{
+        crdt: CrdtTalk.Counter.status(),
+        slide: CrdtTalk.Slides.status()
+      }, socket}
     else
       {:error, %{reason: "unauthorized"}}
     end
@@ -17,17 +18,18 @@ defmodule CrdtTalkWeb.RoomChannel do
     {:reply, {:ok, payload}, socket}
   end
 
-  # It is also common to receive messages from the client and
-  # broadcast to everyone in the current topic (room:lobby).
-  def handle_in("shout", payload, socket) do
-    broadcast(socket, "shout", payload)
-    {:noreply, socket}
-  end
-
   def handle_in("update", update, socket) do
     IO.inspect("we got clientU #{inspect(update)}")
     new_state = CrdtTalk.Counter.update(update)
     broadcast(socket, "update", new_state)
+    IO.inspect("new state was #{inspect(new_state)}")
+    {:noreply, socket}
+  end
+
+  def handle_in("update_slide", update, socket) do
+    IO.inspect("we got clientU #{inspect(update)}")
+    new_state = CrdtTalk.Slides.update(update)
+    broadcast(socket, "update_slide", %{ slide: new_state })
     IO.inspect("new state was #{inspect(new_state)}")
     {:noreply, socket}
   end

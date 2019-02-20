@@ -50,3 +50,44 @@ body {
 code {
   word-wrap: break-word;
 }
+
+#client_root {
+  height: 90vh;
+  width: 90vw;
+  font-size: 26px;
+  padding: 5vw 5vw 5vw 5vw;
+  background-image: url("/images/image2.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.client-container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  color: #2C3E6B;
+  /*align-items: center;
+  justify-content: center;*/
+}
+
+.client-heading {
+  text-transform: capitalize;
+  font-family: proxima_novabold;
+  align-self: center;
+  justify-self: center;
+  text-transform: uppercase;
+}
+
+.counter-container {
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+}
+
+.client-counter {
+  font-size: 72px;
+  margin: 10px;
+  text-transform: uppercase;
+  font-family: proxima_novabold;
+  font-weight: 700;
+}

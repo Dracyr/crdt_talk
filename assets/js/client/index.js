@@ -43,13 +43,15 @@ export default class Client extends React.Component {
         counter: 0,
         neg_counter: 0,
         texts: ["hello", "world"],
-        texts_tombstones: []
+        texts_tombstones: [],
       },
+      slide: "start",
       text_input: ""
     };
 
     this.channel = props.socket.channel("room:lobby", {});
     this.channel.on("update", this.receiveUpdate);
+    this.channel.on("update_slide", this.receiveSlideUpdate);
     this.textRef = React.createRef();
   }
 
@@ -58,7 +60,7 @@ export default class Client extends React.Component {
       .join()
       .receive("ok", resp => {
         console.log("Joined successfully", resp);
-        this.setState({ crdt: resp });
+        this.setState({ crdt: resp.crdt, slide: resp.slide });
       })
       .receive("error", resp => {
         console.log("Unable to join", resp);
@@ -82,6 +84,21 @@ export default class Client extends React.Component {
     console.log("UPDAET", update);
     this.setState({ crdt: update });
   };
+
+  receiveSlideUpdate = newSlide => {
+    console.log("newSlide", newSlide);
+    this.setState({slide: newSlide.slide})
+    // 'start'
+    // 'count_pos'
+    // 'count'
+    // 'text'
+    // 'text_delete'
+    // 'fulltext'
+    // 'end'
+    if (this.state.slide == "fulltext") {
+      this.activateFulltext();
+    }
+  }
 
   incrementCounter = () => {
     const newCounter = this.state.crdt.counter + 1;
@@ -155,12 +172,74 @@ export default class Client extends React.Component {
 
   render() {
     return (
-      <div>
-        Hej
-        <textarea
-          style={{ height: "100%", width: "100%", minHeight: "50vh" }}
-          ref={this.textRef}
-        />
+      <div className="client-container">
+        {this.state.slide == "start" && (
+          <div className="client-heading">Welcome! <br/> Something cool will happen here soon</div>
+        )}
+        {this.state.slide == "count_pos" && (
+          <div className="counter-container">
+            <div className="client-counter">{this.state.crdt.counter}</div>
+            <button onClick={this.incrementCounter}>Click me!</button>
+          </div>
+        )}
+        {this.state.slide == "count" && (
+          <div  className="counter-container">
+            <div className="client-counter">{this.state.crdt.counter - this.state.crdt.neg_counter}</div>
+            <div className="client-heading">({this.state.crdt.counter} - {this.state.crdt.neg_counter})</div>
+            <button onClick={this.incrementCounter}>More!</button>
+            <button onClick={this.decrementCounter}>Less!</button>
+          </div>
+        )}
+        {this.state.slide == "text" && (
+          <div className="counter-container">
+            <div>{this.state.crdt.texts.map(t => `${t} `)}</div>
+            <input
+              type="text"
+              value={this.state.text_input}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+            <button onClick={this.sendText}>Send</button>
+          </div>
+        )}
+        {this.state.slide == "text_delete" && (
+          <div  className="counter-container">
+            {this.state.crdt.texts
+              .filter(t => !this.state.crdt.texts_tombstones.includes(t))
+              .map(t => (
+                <span key={t} onClick={() => this.removeText(t)}>
+                  {t}{" "}
+                </span>
+              ))}
+
+            <div>
+              <div style={{ marginTop: "5em" }}>
+                <input
+                  type="text"
+                  value={this.state.text_input}
+                  onChange={this.handleChange}
+                  onKeyPress={this.handleKeyPress}
+                />
+                <button onClick={this.sendText}>Send</button>
+              </div>
+
+              <span>Try touching a word!</span>
+            </div>
+          </div>
+        )}
+        {this.state.slide == "fulltext" && (
+          <div>
+            <textarea ref={this.textRef}
+                      style={{ height: "100%", width: "100%", minHeight: "50vh" }} />
+          </div>
+        )}
+        {this.state.slide == "end" && (
+          <div className="client-heading">Nothing more is going to happen here, all your attention belong to me</div>
+        )}
+
+        {this.state.slide == "final" && (
+          <div className="client-heading">Thanks for listening!</div>
+        )}
       </div>
     );
   }

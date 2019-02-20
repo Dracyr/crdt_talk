@@ -9,12 +9,13 @@ defmodule CrdtTalk.Application do
     # List all child processes to be supervised
     children = [
       # Start the Ecto repository
-      CrdtTalk.Repo,
+      # CrdtTalk.Repo,
       # Start the endpoint when the application starts
       CrdtTalkWeb.Endpoint,
       # Starts a worker by calling: CrdtTalk.Worker.start_link(arg)
       # {CrdtTalk.Worker, arg},
-      CrdtTalk.Counter
+      CrdtTalk.Counter,
+      CrdtTalk.Slides
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
